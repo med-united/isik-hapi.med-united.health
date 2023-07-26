@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: 'jdbc:postgresql://localhost:5000/fhir'
+    username: hapi
+    password: admin
+    driverClassName: org.postgresql.Driver
+    max-active: 15
