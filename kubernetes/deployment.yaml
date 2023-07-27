@@ -50,16 +50,7 @@ spec:
             secretKeyRef:
               name: fhir-server
               key: dbPassword
-        - name: BROKER_USER
-          valueFrom:
-            secretKeyRef:
-              name: broker-secret
-              key: user
-        - name: BROKER_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: broker-secret
-              key: password
+
 ---
 
 kind: Service
