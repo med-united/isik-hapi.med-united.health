@@ -190,11 +190,6 @@
             </exclusions>
         </dependency>
 
-        <dependency>
-            <groupId>org.keycloak</groupId>
-            <artifactId>keycloak-spring-boot-starter</artifactId>
-        </dependency>
-
         <!-- This example uses H2 embedded database. If you are using another database such as Mysql or Oracle, you may omit the following dependencies and replace them with an appropriate database client
             dependency for your database platform. -->
         <dependency>
@@ -314,11 +309,11 @@
             <version>${spring_boot_version}</version>
         </dependency>
 
-        <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-            <version>${spring_boot_version}</version>
-		</dependency>
+<!--        <dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-security</artifactId>-->
+<!--            <version>${spring_boot_version}</version>-->
+<!--		</dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -354,18 +349,6 @@
         </dependency>
 
     </dependencies>
-
-    <dependencyManagement>
-      <dependencies>
-        <dependency>
-        <groupId>org.keycloak.bom</groupId>
-        <artifactId>keycloak-adapter-bom</artifactId>
-        <version>18.0.0</version>
-        <type>pom</type>
-        <scope>import</scope>
-        </dependency>
-      </dependencies>
-    </dependencyManagement>
 
     <build>
 
