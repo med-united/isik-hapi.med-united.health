@@ -1,11 +1,11 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: fhir-certificate
+  name: isik-hapi-certificate
   namespace: default
 spec:
   dnsNames:
-    - fhir.med-united.health
+    - isik-hapi.med-united.health
   secretName: fhir-tls
   issuerRef:
     name: letsencrypt-cluster-issuer
@@ -15,22 +15,22 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fhir
+  name: isik-hapi
   labels:
-    app: fhir
+    app: isik-hapi
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: fhir
+      app: isik-hapi
   template:
     metadata:
       labels:
-        app: fhir
+        app: isik-hapi
     spec:
       containers:
-      - name: fhir
-        image: 765415433338.dkr.ecr.eu-central-1.amazonaws.com/fhir:$IMAGE_TAG
+      - name: isik-hapi
+        image: 765415433338.dkr.ecr.eu-central-1.amazonaws.com/isik-hapi:$IMAGE_TAG
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -38,17 +38,17 @@ spec:
         - name: DB_URL
           valueFrom:
             secretKeyRef:
-              name: fhir-server
+              name: isik-hapi-server
               key: dbUrl
         - name: DB_USERNAME
           valueFrom:
             secretKeyRef:
-              name: fhir-server
+              name: isik-hapi-server
               key: dbUsername
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: fhir-server
+              name: isik-hapi-server
               key: dbPassword
 
 ---
@@ -56,10 +56,10 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: fhir
+  name: isik-hapi
 spec:
   selector:
-    app: fhir
+    app: isik-hapi
   ports:
     - port: 8080
 
@@ -68,7 +68,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: fhir
+  name: isik-hapi
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/cors-allow-headers: Content-Type, Authorization, Cache-Control
@@ -82,16 +82,16 @@ metadata:
 spec:
   tls:
     - hosts:
-      - fhir.med-united.health
-      secretName: fhir-tls
+      - isik-hapi.med-united.health
+      secretName: isik-hapi-tls
   rules:
-  - host: fhir.med-united.health
+  - host: isik-hapi.med-united.health
     http:
       paths:
         - path: /
           pathType: Prefix
           backend:
             service:
-              name: fhir
+              name: isik-hapi
               port:
                 number: 8080
