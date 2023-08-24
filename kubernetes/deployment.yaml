@@ -6,7 +6,7 @@ metadata:
 spec:
   dnsNames:
     - isik-hapi.med-united.health
-  secretName: fhir-tls
+  secretName: isik-hapi-tls
   issuerRef:
     name: letsencrypt-cluster-issuer
     kind: ClusterIssuer
