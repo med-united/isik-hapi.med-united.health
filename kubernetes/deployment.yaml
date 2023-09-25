@@ -10,6 +10,7 @@ spec:
   issuerRef:
     name: letsencrypt-cluster-issuer
     kind: ClusterIssuer
+    
 ---
 
 apiVersion: apps/v1
